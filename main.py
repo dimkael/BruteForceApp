@@ -12,5 +12,3 @@ while not success:
     if response.status_code == 200:
         print(data)
         success = True
-
-
