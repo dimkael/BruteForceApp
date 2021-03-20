@@ -2,7 +2,7 @@ import random
 import string
 
 
-with open('pop_passwords.txt') as file:
+with open('../pop_passwords.txt') as file:
     pop_passwords = file.read()
 pop_passwords = pop_passwords.split('\n')
 
