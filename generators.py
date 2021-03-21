@@ -2,8 +2,8 @@ import string
 
 
 class BruteForceGenerator:
-    def __init__(self):
-        self.alphabet = string.digits + string.ascii_lowercase
+    def __init__(self, alphabet=string.digits + string.ascii_lowercase):
+        self.alphabet = alphabet
         self.base = len(self.alphabet)
         self.length = 0
         self.i = 0
@@ -12,7 +12,7 @@ class BruteForceGenerator:
         self.length = 0
         self.i = 0
 
-    def brute_force(self):
+    def generate(self):
         x = self.i
         result = ''
 
@@ -31,17 +31,26 @@ class BruteForceGenerator:
         return result
 
 
-class PopularPasswordsGenerator():
-    def __init__(self):
-        self.alphabet = string.ascii_letters + string.digits + string.punctuation
-        with open('pop_passwords.txt') as file:
-            self.pop_passwords = file.read()
-        self.pop_passwords = self.pop_passwords.split('\n')
+class ListGenerator:
+    def __init__(self, tokens):
+        self.tokens = tokens
+        self.i = 0
 
     def reset(self):
         self.i = 0
 
     def generate(self):
-        password = self.pop_passwords[self.i]
+        if self.i >= len(self.tokens):
+            return
+
+        token = self.tokens[self.i]
         self.i += 1
-        return password
+        return token
+
+
+class ListFileGenerator(ListGenerator):
+    def __init__(self, filename='pop_passwords.txt'):
+        with open(filename) as file:
+            tokens = file.read().split('\n')
+
+        super().__init__(tokens=tokens)

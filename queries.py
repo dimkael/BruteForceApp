@@ -9,7 +9,7 @@ def local_server(login, password):
     return response.status_code == 200
 
 
-def local_server_protected(login, password, attempts = 10, timeout = 1):
+def local_server_protected(login, password, attempts=10, timeout=1):
     data = {'login': login, 'password': password}
 
     for i in range(attempts):
@@ -29,5 +29,5 @@ def local_server_protected(login, password, attempts = 10, timeout = 1):
         if i < attempts - 1:
             time.sleep(timeout)
 
-    print('Не удалось проверить пару ', data)
+    print('Failed to check pair ', data)
     return False
